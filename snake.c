@@ -44,7 +44,7 @@ int main()
 	o[o1] = '\\';
 	for(int j = 0; j < BRD_WIDTH; ++j)
 	{
-		o[oi++] = '-';
+		o[oi++]   = '-';
 		o[o1+j+1] = '-';
 	}
 	o[oi++] = '\\';
