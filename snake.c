@@ -109,14 +109,14 @@ int main()
 		s[0] = ((s[0] += dx) < 0 ? BRD_WIDTH  - 1 : s[0] % BRD_WIDTH);
 		s[1] = ((s[1] += dy) < 0 ? BRD_HEIGHT - 1 : s[1] % BRD_HEIGHT);
 
-		for(int h = 0; h < BRD_HEIGHT; ++h)
+		for(int y = 0; y < BRD_HEIGHT; ++y)
 		{
 			o[oi++] = '|';
-			for(int w = 0; w < BRD_WIDTH; ++w)
+			for(int x = 0; x < BRD_WIDTH; ++x)
 			{
 				int a = 0;
 				char c = ' ';
-				if(f && fx == w && fy == h)
+				if(f && fx == x && fy == y)
 				{
 					if(s[0] == fx && s[1] == fy)
 					{
@@ -133,7 +133,7 @@ int main()
 				}
 				else for(int j = 0; j < i; j += 2)
 				{
-					if(s[j] == w && s[j+1] == h)
+					if(s[j] == x && s[j+1] == y)
 					{
 						if(++a > 1)
 						{
