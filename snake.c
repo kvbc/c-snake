@@ -8,7 +8,7 @@
 
 #define SNAKE_CHAR			'#'
 #define SNAKE_SPEED			100
-#define SNAKE_SLOWDOWN		3
+#define SNAKE_SLOWDOWN			3
 
 #define FOOD_CHAR			'*'
 #define FOOD_MOVES			3
