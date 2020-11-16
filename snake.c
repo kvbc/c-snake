@@ -15,7 +15,7 @@
 
 #define BRD_WIDTH			60
 #define BRD_HEIGHT			30
-#define MAX_SNAKE_SIZE			(BRD_WIDTH + BRD_HEIGHT) / 2
+#define MAX_SNAKE_SIZE			SNAKE_SPEED / SNAKE_SLOWDOWN - 1
 
 
 int main()
