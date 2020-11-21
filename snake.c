@@ -3,7 +3,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+#ifdef _WIN32
 #include <Windows.h>
+#define sleep Sleep
+#else
+#include <unistd.h>
+#endif
 
 
 #define FOOD_CHAR			'*'
@@ -126,7 +132,7 @@ int main()
 							free(s);
 							free(o);
 							puts("Game over!");
-							Sleep(1000);
+							sleep(1000);
 							_getch();
 							return 0;
 						}
@@ -141,6 +147,6 @@ int main()
 
 		oi = o2;
 		printf("%s", o);
-		Sleep(t);
+		sleep(t);
 	}
 }
