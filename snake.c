@@ -11,7 +11,6 @@
 #include <unistd.h>
 #endif
 
-
 #define FOOD_CHAR			'*'
 #define SNAKE_CHAR			'#'
 #define SNAKE_SPEED			100
