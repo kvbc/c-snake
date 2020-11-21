@@ -1,3 +1,3 @@
 # c-snake
 
-console implementation of the Snake game written in C 
+Console implementation of the classic Snake game written in C 
