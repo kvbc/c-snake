@@ -12,7 +12,7 @@
 #define SNAKE_SLOWDOWN		3
 #define BRD_WIDTH			60
 #define BRD_HEIGHT			30
-#define MAX_SNAKE_SIZE		(BRD_WIDTH + BRD_HEIGHT) / 2
+#define MAX_SNAKE_SIZE		SNAKE_SPEED / SNAKE_SLOWDOWN - 1
 
 
 int main()
@@ -20,6 +20,7 @@ int main()
 	srand(time(NULL));
 
 	int i = 0;
+	int l = 1;
 	int t = SNAKE_SPEED;
 	int fx = rand() % BRD_WIDTH;
 	int fy = rand() % BRD_HEIGHT;
@@ -107,11 +108,12 @@ int main()
 				{
 					if(s[0] == fx && s[1] == fy)
 					{
+						i += 2;
 						c = SNAKE_CHAR;
 						t += SNAKE_SLOWDOWN;
-						fx = rand() % BRD_WIDTH;
-						fy = rand() % BRD_HEIGHT;
-						i += 2;
+						int m = ++l == MAX_SNAKE_SIZE;
+						fx = m ? -1: rand() % BRD_WIDTH;
+						fy = m ? -1 : rand() % BRD_HEIGHT;
 					}
 					else c = FOOD_CHAR;
 				}
