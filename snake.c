@@ -101,10 +101,10 @@ int main()
 			lc = c;
 		}
 
-		for(int j = i - 1; j > 1; --j)
+		for(int j = i - 1; j > 1; j -= 2)
 		{
 			s[j]   = s[j-2];
-			s[--j] = s[j-2];
+			s[j-1] = s[j-3];
 		}
 		s[0] = ((s[0] += dx) < 0 ? BRD_WIDTH  - 1 : s[0] % BRD_WIDTH);
 		s[1] = ((s[1] += dy) < 0 ? BRD_HEIGHT - 1 : s[1] % BRD_HEIGHT);
@@ -125,8 +125,9 @@ int main()
 						t += SNAKE_SLOWDOWN;
 						fx = -1;
 						fy = -1;
-						s[i++] = s[i-1] + dx;
-						s[i++] = s[i-2] + dy;
+						s[i]   = s[i-2] + dx;
+						s[i+1] = s[i-1] + dy;
+						i += 2;
 						c = SNAKE_CHAR;
 					}
 					else c = FOOD_CHAR;
