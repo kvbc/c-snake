@@ -6,16 +6,13 @@
 #include <Windows.h>
 
 
+#define FOOD_CHAR			'*'
 #define SNAKE_CHAR			'#'
 #define SNAKE_SPEED			100
-#define SNAKE_SLOWDOWN			3
-
-#define FOOD_CHAR			'*'
-#define FOOD_MOVES			3
-
+#define SNAKE_SLOWDOWN		3
 #define BRD_WIDTH			60
 #define BRD_HEIGHT			30
-#define MAX_SNAKE_SIZE			SNAKE_SPEED / SNAKE_SLOWDOWN - 1
+#define MAX_SNAKE_SIZE		(BRD_WIDTH + BRD_HEIGHT) / 2
 
 
 int main()
@@ -23,22 +20,19 @@ int main()
 	srand(time(NULL));
 
 	int i = 0;
-	int l = 1;
-	int f = 0;
 	int t = SNAKE_SPEED;
-	int m = FOOD_MOVES - 1;
-	int fx = -1;
-	int fy = -1;
+	int fx = rand() % BRD_WIDTH;
+	int fy = rand() % BRD_HEIGHT;
 	int dx = 0;
 	int dy = 0;
 	char lc = 0;
-	int* s = malloc(MAX_SNAKE_SIZE * sizeof(int) * 2);
+	int* s = (int*)malloc(MAX_SNAKE_SIZE * sizeof(int) * 2);
 
 	int oi = 0;
 	int o1 = BRD_WIDTH * BRD_HEIGHT + BRD_HEIGHT * 3 + BRD_WIDTH + 3;
 	int o2 = BRD_WIDTH + 3;
 	int oe = o1 + o2;
-	char* o = malloc((oe + 1) * sizeof(char));
+	char* o = (char*)malloc((oe + 1) * sizeof(char));
 
 	o[oi++] = '/';
 	o[o1] = '\\';
@@ -66,18 +60,11 @@ int main()
 			    (c == 's')		    ||
 			    (c == 'd'))		    &&!
 			   ((c == lc)		    ||
-			    (c=='w' && lc=='s')     ||
-			    (c=='s' && lc=='w')     ||
-			    (c=='a' && lc=='d')     ||
+			    (c=='w' && lc=='s') ||
+			    (c=='s' && lc=='w') ||
+			    (c=='a' && lc=='d') ||
 			    (c=='d' && lc=='a')))
 			{
-				if(!f && (++m == FOOD_MOVES))
-				{
-					m = 0;
-					f = 1;
-					fx = rand() % BRD_WIDTH;
-					fy = rand() % BRD_HEIGHT;
-				}
 				switch(c)
 				{
 					case 'w':
@@ -116,19 +103,15 @@ int main()
 			{
 				int a = 0;
 				char c = ' ';
-				if(f && fx == x && fy == y)
+				if(x == fx && y == fy)
 				{
 					if(s[0] == fx && s[1] == fy)
 					{
-						m = 0;
-						f = (++l == MAX_SNAKE_SIZE);
-						t += SNAKE_SLOWDOWN;
-						fx = -1;
-						fy = -1;
-						s[i]   = s[i-2] + dx;
-						s[i+1] = s[i-1] + dy;
-						i += 2;
 						c = SNAKE_CHAR;
+						t += SNAKE_SLOWDOWN;
+						fx = rand() % BRD_WIDTH;
+						fy = rand() % BRD_HEIGHT;
+						i += 2;
 					}
 					else c = FOOD_CHAR;
 				}
@@ -139,6 +122,7 @@ int main()
 						if(++a > 1)
 						{
 							free(s);
+							free(o);
 							puts("Game over!");
 							Sleep(1000);
 							_getch();
